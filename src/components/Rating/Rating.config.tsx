@@ -22,6 +22,10 @@ export default {
     icon: FaRegStar,
     events: [
       {
+        label: 'On Change',
+        value: 'onchange',
+      },
+      {
         label: 'On Click',
         value: 'onclick',
       },
