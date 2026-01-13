@@ -18,7 +18,7 @@ const Rating: FC<IRatingProps> = ({
   fullColor = 'rgb(255, 215, 0)',
   emptyColor = 'rgb(243, 243, 243)',
 }) => {
-  const { connect } = useRenderer();
+  const { connect, emit } = useRenderer();
   const [value, setValue] = useState(() => 0);
   const [hover, setHover] = useState<number | undefined>(() => undefined);
 
@@ -74,7 +74,10 @@ const Rating: FC<IRatingProps> = ({
           emptyColor={emptyColor}
           style={style}
           onClickCallback={(value: number) => {
-            !readOnly && ds.setValue<number>(null, value);
+            if (!readOnly) {
+              ds.setValue<number>(null, value);
+              emit('onchange');
+            }
           }}
           onMouseEvent={(value: number | undefined) => {
             !readOnly && setHover(value);
